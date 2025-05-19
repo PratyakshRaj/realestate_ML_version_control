@@ -24,7 +24,7 @@ def preprocess(df:pd.DataFrame) -> pd.DataFrame:
         df['Construction year range']=df['Construction year range'].str.split().str[-1]
         df['Construction year range'].fillna("1980",inplace=True)
         df['Construction year range']=df['Construction year range'].astype(int)
-        df["proprerty average height"].fillna(np.mean(df["proprerty average height"]),inplace=True)
+        df["proprerty average height"].fillna(df["proprerty average height"].median(),inplace=True)
         df["price"]=np.log10(df["price"])
     except Exception as e:
         raise Exception(f"Error in preprocessing data:{e}")    
@@ -90,8 +90,8 @@ def main():
         
         os.makedirs(processed_data_path)
         
-        save_data(train_processed_data,os.path.join(processed_data_path,"train_processed.csv"))
-        save_data(test_processed_data,os.path.join(processed_data_path,"test_processed.csv"))
+        save_data(train_processed_data,os.path.join(processed_data_path,"train_processed_v2_median.csv"))
+        save_data(test_processed_data,os.path.join(processed_data_path,"test_processed_v2_median.csv"))
     except Exception as e:
         raise Exception(f"An error occured:{e}")    
 if __name__ == "__main__":
