@@ -2,4 +2,4 @@ data_collection:
   test_size:  0.25
 
 model_building:
-  depth:  5
+  depth:  3
